@@ -13,7 +13,7 @@
     <ResourceDictionary>
         <ResourceDictionary.ThemeDictionaries>
             <ResourceDictionary x:Key="Light">
-                <SolidColorBrush x:Key="IconBrush" Color="#000000" />
+                <SolidColorBrush x:Key="IconBrush" Color="#2D2D2D" />
                 <SolidColorBrush x:Key="BackgroundBrush" Color="#F5F5F5" />
                 <SolidColorBrush x:Key="RegionBrush" Color="#FFFFFF" />
                 <SolidColorBrush x:Key="SecondaryTextBrush" Color="#666666" />
@@ -28,6 +28,7 @@
                 <SolidColorBrush x:Key="PrimaryNormalBrush" Color="#409EFF" />
             </ResourceDictionary>
         </ResourceDictionary.ThemeDictionaries>
+         <!--BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" /-->
     </ResourceDictionary>
 </Application.Resources>
 </Application>

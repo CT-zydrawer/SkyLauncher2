@@ -9,10 +9,10 @@
     <Border CornerRadius="4" Padding="10" Margin="10" Background="{DynamicResource RegionBrush}">
         <Grid>
 
-            <TabControl >
-                <TabItem IsVisible="False" Width="0">
-                </TabItem>
-                <TabItem Header="安装整合包" FontSize="15">
+            <TabControl SelectionChanged="TabControl_SelectionChanged">
+
+                <TabItem Header="安装整合包" FontSize="20">
+                    <TransitioningContentControl PageTransition="{StaticResource CrossFade}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -26,7 +26,7 @@
                             Margin="0,5,0,5"
                             Height="40"
                 
-                            IsEnabled="{Binding IsInstalling, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Invert}">
+                     >
                                 <DockPanel>
                                     <!-- Icon: <iconPacks:PackIconLucide Kind="FolderOpenDot" Margin="0,0,10,0"/> -->
                                     <TextBlock Text="选择整合包文件（.zip / .mrpack）" FontSize="14"/>
@@ -95,9 +95,11 @@
                                 </DockPanel>
                             </Border>
                         </Grid>
-
+</TransitioningContentControl>
                 </TabItem>
-                <TabItem Header="安装Java JDK" FontSize="15">
+                <TabItem Header="安装Java JDK" FontSize="20">
+                    <TransitioningContentControl PageTransition="{StaticResource CrossFade}">
+                        </TransitioningContentControl>
                 </TabItem>
             </TabControl>
 

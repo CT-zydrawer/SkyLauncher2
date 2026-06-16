@@ -13,11 +13,11 @@
         CornerRadius="8"
         Background="{DynamicResource RegionBrush}">
 
-        <TabControl x:Name="MainTabControl">
+        <TabControl x:Name="MainTabControl" SelectionChanged="MainTabControl_SelectionChanged">
 
             <!-- 主题色 -->
             <TabItem Header="主题色" FontSize="20">
-
+                <TransitioningContentControl PageTransition="{StaticResource CrossFade}">
                 <ScrollViewer>
                     <StackPanel Margin="20" Spacing="12">
 
@@ -33,10 +33,10 @@
 
                     </StackPanel>
                 </ScrollViewer>
-
+                    </TransitioningContentControl>
             </TabItem>
             <TabItem Header="背景图片" FontSize="20">
-
+                <TransitioningContentControl PageTransition="{StaticResource CrossFade}">
                 <StackPanel Margin="20" Spacing="12">
 
                     <Border Height="1"
@@ -46,20 +46,21 @@
                     <TextBlock Text="背景设置"
                                FontSize="16"
                                FontWeight="SemiBold"/>
-
+                    <DockPanel>
                     <Button Content="选择图片"
                             HorizontalAlignment="Left"/>
 
                     <Button Content="确认"
                             Click="ConfirmSelectPic"
                             Classes="Primary"
-                            />
-
-                </StackPanel>
+                            Margin="20,0,0,0"/>
+</DockPanel>
+                    </StackPanel>
+                    </TransitioningContentControl>
 
             </TabItem>
             <TabItem Header="主题模式" FontSize="20">
-
+                <TransitioningContentControl PageTransition="{StaticResource CrossFade}">
                 <StackPanel Margin="20" Spacing="10">
 
                     <Border Height="1"
@@ -70,10 +71,10 @@
                                FontSize="16"
                                FontWeight="SemiBold"/>
 
-                    <RadioButton Content="Light"
+                    <RadioButton Content="浅色"
                                  Click="SwitchToLight"/>
 
-                    <RadioButton Content="Dark"
+                    <RadioButton Content="深色"
                                  Click="SwitchToDark"/>
 
                     <TextBlock Text="（Avalonia中可通过 ThemeVariant 切换）"
@@ -81,10 +82,10 @@
                                FontSize="12"/>
 
                 </StackPanel>
-
+                </TransitioningContentControl>
             </TabItem>
             <TabItem Header="透明度" FontSize="20">
-
+                <TransitioningContentControl PageTransition="{StaticResource CrossFade}">
                 <StackPanel Margin="20" Spacing="12">
 
                     <Border Height="1"
@@ -100,14 +101,15 @@
                             Maximum="1"
                             TickFrequency="0.05"
                             IsSnapToTickEnabled="True"
-                            x:Name="OpacitySlider"/>
+                            x:Name="OpacitySlider"
+                            HorizontalAlignment="Left"/>
 
                     <Button Content="应用"
                             Click="ConfirmOpacity"
-                            Classes="Primary" HorizontalAlignment="Center"/>
+                            Classes="Primary" HorizontalAlignment="Left"/>
 
                 </StackPanel>
-
+                </TransitioningContentControl>
             </TabItem>
 
         </TabControl>

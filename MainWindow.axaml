@@ -25,18 +25,14 @@
             </Grid.ColumnDefinitions>
             
             <StackPanel Grid.Column="0" x:Name="NavigatePannel" Background="{DynamicResource BackgroundBrush}">
-                <!--StackPanel.Background>
-                    <ImageBrush
-ImageSource="/Background.png"
-Stretch="Fill" Opacity="0.8"/>
-                </StackPanel.Background-->
+               
                 <TextBlock Text="NAVIGATION"  Margin="15,20,10,10"  Foreground="{DynamicResource SecondaryTextBrush}" FontSize="12" FontWeight="Bold"/>
                 <Button Margin="10" Height="40" HorizontalAlignment="Left" Width="150"  Click="GoToMainPage">
                     <DockPanel>
 <Path Data="{StaticResource SquareChartGanttRegular}" Width="14" Height="14"
       Stretch="UniformToFill" Fill="{DynamicResource IconBrush}" />                        <TextBlock Text="主菜单" Margin="12,0,0,0" VerticalAlignment="Center"/>
                     </DockPanel>
-                    
+                   
                 </Button>
                 <Button Margin="10" Height="40" HorizontalAlignment="Left" Width="150"  Click="GoToConfigPage">
                     <DockPanel>
@@ -70,7 +66,9 @@ Stretch="UniformToFill" Fill="{DynamicResource IconBrush}" />                   
                     </DockPanel>
                 </Button>
             </StackPanel>
-            <ContentControl x:Name="ContentArea" Grid.Column="1"/>
+            <TransitioningContentControl x:Name="ContentArea" 
+                                 Grid.Column="1"
+                                 PageTransition="{StaticResource PageSlide}" />
             
         </Grid>
         
