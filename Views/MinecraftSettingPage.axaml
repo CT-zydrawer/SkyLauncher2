@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="SkyLauncher.Views.MinecraftSettingPage"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SkyLauncher.Views"
+             xmlns:vm="clr-namespace:SkyLauncher.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:MinecraftSettingViewModel">
+    
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border Background="{DynamicResource RegionBrush}" CornerRadius="4" Padding="10" Margin="10" >
+                <StackPanel Orientation="Horizontal" >
+                <Button  Width="110" Margin="0,0,10,0"  Click="OpenModFilesFolder"
+>
+                        <DockPanel>
+                            <!-- Icon: <iconPacks:PackIconPhosphorIcons Kind="FolderOpen" /> -->
+                            <TextBlock Text="打开文件夹" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        </DockPanel>
+                    </Button>
+                <Button Margin="10,0,10,0" Click="GoBack">
+                    <DockPanel>
+                        <!-- Icon: <iconPacks:PackIconIonicons Kind="ArrowRoundBackiOS" /> -->
+                        <TextBlock Text="返回" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                    </DockPanel>
+                </Button>
+                </StackPanel>
+            </Border>
+        <Border CornerRadius="4" Padding="10" Margin="10" Background="{DynamicResource RegionBrush}" Grid.Row="1" >
+
+            <DataGrid Grid.Row="0" 
+      ItemsSource="{Binding Mods}"
+      AutoGenerateColumns="False"
+      x:Name="ModsDataGrid" Opacity="0.9">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="400" Header="名称" Binding="{Binding DisplayName}" IsReadOnly="True" />
+                    <DataGridTextColumn Width="130" Header="版本" Binding="{Binding Version}" IsReadOnly="True" />
+                    <DataGridTemplateColumn Header="状态" Width="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding IsEnabled}"
+                              Command="{Binding DataContext,RelativeSource={RelativeSource AncestorType=UserControl}}"
+                              CommandParameter="{Binding}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Border>
+            <!--Grid x:Name="LoadingGrid" IsVisible="False">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Border VerticalAlignment="Center" Grid.Column="1" Background="{DynamicResource PrimaryBrush}" CornerRadius="10">
+                    <StackPanel>
+                        <ProgressBar Margin="10"/>
+                        <TextBlock Text=" "/>
+                    </StackPanel>
+                </Border>
+            </Grid-->
+        </Grid>
+
+</UserControl>

@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="SkyLauncher.Views.AboutPage"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SkyLauncher.Views"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450">
+    <Border  CornerRadius="4" Padding="10" Margin="10" Background="{DynamicResource RegionBrush}"> 
+        
+        <Grid Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Margin="15" >
+                <TextBlock Text="SkyLauncher Alpha Avalonia" FontSize="24" FontWeight="Bold" />
+                <TextBlock Text="内部人员预览 版本 Alpha 1.0.6" FontSize="14" Margin="0,4,0,20"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="15*"/>
+                        <ColumnDefinition Width="15*"/>
+                        <ColumnDefinition Width="45*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Background="LightGray" Padding="4,2" CornerRadius="2" HorizontalAlignment="Left"><TextBlock Text=".NET运行库: .NET8" FontSize="11"/></Border>
+                    <Border Background="LightGray" Padding="4,2" CornerRadius="2" Grid.Column="1" HorizontalAlignment="Left"><TextBlock Text="Windows: 7+" FontSize="11"/></Border>
+                    <Border Background="LightGray" Padding="4,2" CornerRadius="2" Grid.Column="2" HorizontalAlignment="Left"><TextBlock Text="HandyControl: 3.6.0" FontSize="11"/></Border>
+                </Grid>
+
+            </StackPanel>
+            <StackPanel Grid.Row="1" Margin="10">
+                <TextBlock Text="SkyLauncher 是一个基于Avalonia的启动器，旨在给整合包作者提供高度自定义的页面" TextWrapping="Wrap" Margin="0,0,0,5"/>
+                <TextBlock Text="开发者：zydrawer   SunkenWood" Margin="0,0,0,5"/>
+
+            </StackPanel>
+            <StackPanel Grid.Row="2" Margin="10">
+                <TextBlock Text="界面控件来自 Avalonia Fluent主题 ，图标来自 MahApps " TextWrapping="Wrap" Margin="0,0,0,5"/>
+                <TextBlock Text="核心逻辑使用了Xcube-Studio的Natsurainko.FluentCore" TextWrapping="Wrap" Margin="0,0,0,5"/>
+                <TextBlock Text="尊重原作者的MIT协议，若Xcube认为侵权请联系我们整改" Margin="0,0,0,5"/>
+            </StackPanel>
+            <StackPanel Grid.Row="3" Margin="10">
+                <TextBlock Text="采用AGPL3.0开源协议，非开源情况下禁止商用 " TextWrapping="Wrap" Margin="0,0,0,5"/>
+                
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

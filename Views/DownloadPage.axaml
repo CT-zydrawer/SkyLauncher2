@@ -1,0 +1,106 @@
+﻿<UserControl x:Class="SkyLauncher.Views.DownloadPage"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SkyLauncher.Views"
+             xmlns:vm="clr-namespace:SkyLauncher.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" x:DataType="vm:DownloadViewModel">
+    <Border CornerRadius="4" Padding="10" Margin="10" Background="{DynamicResource RegionBrush}">
+        <Grid>
+
+            <TabControl >
+                <TabItem IsVisible="False" Width="0">
+                </TabItem>
+                <TabItem Header="安装整合包" FontSize="15">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Button x:Name="PackPicker" 
+                            Command="{Binding PickPackageCommand}"
+                            Grid.Row="0" 
+                            Margin="0,5,0,5"
+                            Height="40"
+                
+                            IsEnabled="{Binding IsInstalling, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Invert}">
+                                <DockPanel>
+                                    <!-- Icon: <iconPacks:PackIconLucide Kind="FolderOpenDot" Margin="0,0,10,0"/> -->
+                                    <TextBlock Text="选择整合包文件（.zip / .mrpack）" FontSize="14"/>
+                                </DockPanel>
+                            </Button>
+
+                            <Grid
+            Grid.Row="1" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"
+                    Margin="0,20,0,0"
+                    Opacity="0.9">
+
+                                <Border Background="{DynamicResource RegionBrush}" CornerRadius="4">
+                                    <StackPanel>
+                                        <ProgressBar Value="{Binding Progress}" 
+                                  FontSize="30" 
+                                  Width="100" 
+                                  Height="100"
+                                  IsVisible="{Binding IsInstalling}" Margin="0,10,0,0"/>
+                                        <TextBlock Text="{Binding StatusText}" 
+   FontSize="14" 
+   HorizontalAlignment="Center" 
+   Margin="30,10,30,10"
+   TextWrapping="Wrap"
+   MaxWidth="400"
+   TextAlignment="Center"/>
+                                    </StackPanel>
+
+                                </Border>
+
+                            </Grid>
+
+                            <Border Grid.Row="2" 
+                Background="{DynamicResource RegionBrush}" 
+                CornerRadius="8" 
+                Padding="20" 
+                Margin="0,20,0,0"
+                VerticalAlignment="Bottom"
+                Opacity="0.9">
+
+                                <Border>
+
+                                    <StackPanel>
+                                        <DockPanel>
+                                            <!-- Icon: <iconPacks:PackIconLucide Kind="FileArchive" Width="14" Height="14" VerticalAlignment="Center"/> -->
+                                            <TextBlock Text=" .mrpack — Modrinth 整合包" Margin="0,2,0,2"/>
+                                        </DockPanel>
+                                        <DockPanel>
+                                            <!-- Icon: <iconPacks:PackIconLucide Kind="FileArchive" Width="14" Height="14" VerticalAlignment="Center"/> -->
+                                            <TextBlock Text=".zip — CurseForge 整合包" Margin="0,2,0,2" />
+                                        </DockPanel>
+
+                                    </StackPanel>
+
+                                </Border>
+
+                            </Border>
+                            <Border BorderBrush="Red" Grid.Row="3" Margin="5,10,5,0">
+                                <DockPanel>
+                                    <!-- Icon: <iconPacks:PackIconOcticons Kind="Alert16" Height="25" Width="25" VerticalAlignment="Center" Margin="0,0,10,0" Foreground="#e04f5e"/> -->
+                                    <StackPanel>
+                                        <TextBlock Text="安装前需要配置好Java环境" Foreground="#e04f5e"/>
+                                        <TextBlock Text="安装过程中不要切换页面" Foreground="#e04f5e"/>
+                                    </StackPanel>
+                                </DockPanel>
+                            </Border>
+                        </Grid>
+
+                </TabItem>
+                <TabItem Header="安装Java JDK" FontSize="15">
+                </TabItem>
+            </TabControl>
+
+        </Grid>
+    </Border>
+</UserControl>

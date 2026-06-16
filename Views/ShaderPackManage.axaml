@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="SkyLauncher.Views.ShaderPackManage"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SkyLauncher.Views"
+             xmlns:vm="clr-namespace:SkyLauncher.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" x:DataType="local:ShaderPackManage">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Background="{DynamicResource RegionBrush}" CornerRadius="4" Padding="10" Margin="10" >
+            <StackPanel Orientation="Horizontal" >
+                <Button  Width="110" Margin="0,0,10,0" Click="OpenShaderPackFolder"
+    >
+                    <DockPanel>
+                        <!-- Icon: <iconPacks:PackIconPhosphorIcons Kind="FolderOpen" /> -->
+                        <TextBlock Text="打开文件夹" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    
+                </Button>
+                <Button Margin="10,0,10,0" Click="GoBack">
+                    <DockPanel>
+                        <!-- Icon: <iconPacks:PackIconIonicons Kind="ArrowRoundBackiOS" /> -->
+                        <TextBlock Text="返回" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                    </DockPanel>
+                </Button>
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="1" Margin="10,0,10,0">
+            <DataGrid
+ItemsSource="{Binding DataList}"
+AutoGenerateColumns="False">
+
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn
+        Header="光影包"
+        Width="*"
+        Binding="{Binding FileName}" />
+
+                    
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </Border>
+    </Grid>
+   
+</UserControl>

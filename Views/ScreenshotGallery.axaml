@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="SkyLauncher.Views.ScreenshotGallery"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SkyLauncher.Views"
+             xmlns:vm="clr-namespace:SkyLauncher.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" x:DataType="vm:ScreenshotGalleryViewModel">
+
+    <Grid>
+        <StackPanel>
+        
+        <!-- 顶部工具栏 -->
+        <Border Background="{DynamicResource RegionBrush}" CornerRadius="4" Padding="10" Margin="10" >
+            <StackPanel Orientation="Horizontal">
+                    <Button Width="80" Margin="0,0,10,0"
+                        Click="RefreshButton_Click">
+                        <DockPanel>
+                            <!-- Icon: <iconPacks:PackIconPhosphorIcons Kind="ArrowsClockwiseLight" /> -->
+                            <TextBlock Text="刷新" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        </DockPanel>
+                    </Button>
+                    <Button  Width="110" Margin="0,0,10,0"
+                        Click="OpenFolderButton_Click">
+                        <DockPanel>
+                            <!-- Icon: <iconPacks:PackIconPhosphorIcons Kind="FolderOpen" /> -->
+                            <TextBlock Text="打开文件夹" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        </DockPanel>
+                    </Button>
+                    <Button Margin="10,0,10,0" Click="GoBack">
+                        <DockPanel>
+                            <!-- Icon: <iconPacks:PackIconIonicons Kind="ArrowRoundBackiOS" /> -->
+                            <TextBlock Text="返回" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                        </DockPanel>
+                    </Button>
+                    <TextBlock Text="{Binding ScreenshotCount, StringFormat='共 {0} 张截图'}" 
+                           VerticalAlignment="Center"
+                           Foreground="{DynamicResource SecondaryTextBrush}"/>
+                <TextBlock Text="{Binding ScreenshotFolderPath}" 
+                           VerticalAlignment="Center" Margin="20,0,0,0"
+                           Foreground="{DynamicResource SecondaryTextBrush}"
+                           FontSize="11"
+                           TextTrimming="CharacterEllipsis"
+                           MaxWidth="300"/>
+            </StackPanel>
+        </Border>
+
+        <ContentControl>
+        <ItemsControl ItemsSource="{Binding Screenshots}">
+    <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+            <StackPanel Orientation="Horizontal"/>
+        </ItemsPanelTemplate>
+    </ItemsControl.ItemsPanel>
+</ItemsControl>
+        </ContentControl>
+
+        </StackPanel>
+    </Grid>
+</UserControl>

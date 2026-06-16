@@ -1,0 +1,20 @@
+﻿<Window x:Class="SkyLauncher.Views.LoadingPage"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SkyLauncher.Views"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" 
+             Height="400" Width="600">
+    <Window.Resources>
+        
+    </Window.Resources>
+    <Grid>
+        <Border Background="{DynamicResource RegionBrush}" CornerRadius="4" Padding="10">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <!-- TODO: AnimationPath removed -->
+                <TextBlock Text="正在启动..." FontSize="16" Margin="0,20,0,0" Foreground="Black"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

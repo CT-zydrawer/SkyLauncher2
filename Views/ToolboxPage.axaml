@@ -1,0 +1,116 @@
+﻿<UserControl x:Class="SkyLauncher.Views.ToolboxPage"
+      xmlns="https://github.com/avaloniaui"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SkyLauncher.Views"
+       xmlns:fa="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
+      mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+      >
+    <Border
+        Margin="12"
+        Padding="16"
+        CornerRadius="8"
+        Background="{DynamicResource RegionBrush}">
+
+        <TabControl x:Name="MainTabControl">
+
+            <!-- 主题色 -->
+            <TabItem Header="主题色" FontSize="20">
+
+                <ScrollViewer>
+                    <StackPanel Margin="20" Spacing="12">
+
+                        <Border Height="1"
+                                Background="{DynamicResource SecondaryTextBrush}"
+                                Opacity="0.3"/>
+
+                        <TextBlock Text="主题颜色"
+                                   FontSize="16"
+                                   FontWeight="SemiBold"/>
+
+                        <ColorPicker Name="ColorPicker"/>
+
+                    </StackPanel>
+                </ScrollViewer>
+
+            </TabItem>
+            <TabItem Header="背景图片" FontSize="20">
+
+                <StackPanel Margin="20" Spacing="12">
+
+                    <Border Height="1"
+                            Background="{DynamicResource SecondaryTextBrush}"
+                            Opacity="0.3"/>
+
+                    <TextBlock Text="背景设置"
+                               FontSize="16"
+                               FontWeight="SemiBold"/>
+
+                    <Button Content="选择图片"
+                            HorizontalAlignment="Left"/>
+
+                    <Button Content="确认"
+                            Click="ConfirmSelectPic"
+                            Classes="Primary"
+                            />
+
+                </StackPanel>
+
+            </TabItem>
+            <TabItem Header="主题模式" FontSize="20">
+
+                <StackPanel Margin="20" Spacing="10">
+
+                    <Border Height="1"
+                            Background="{DynamicResource SecondaryTextBrush}"
+                            Opacity="0.3"/>
+
+                    <TextBlock Text="主题模式"
+                               FontSize="16"
+                               FontWeight="SemiBold"/>
+
+                    <RadioButton Content="Light"
+                                 Click="SwitchToLight"/>
+
+                    <RadioButton Content="Dark"
+                                 Click="SwitchToDark"/>
+
+                    <TextBlock Text="（Avalonia中可通过 ThemeVariant 切换）"
+                               Opacity="0.6"
+                               FontSize="12"/>
+
+                </StackPanel>
+
+            </TabItem>
+            <TabItem Header="透明度" FontSize="20">
+
+                <StackPanel Margin="20" Spacing="12">
+
+                    <Border Height="1"
+                            Background="{DynamicResource SecondaryTextBrush}"
+                            Opacity="0.3"/>
+
+                    <TextBlock Text="窗口透明度"
+                               FontSize="16"
+                               FontWeight="SemiBold"/>
+
+                    <Slider Width="300"
+                            Minimum="0.25"
+                            Maximum="1"
+                            TickFrequency="0.05"
+                            IsSnapToTickEnabled="True"
+                            x:Name="OpacitySlider"/>
+
+                    <Button Content="应用"
+                            Click="ConfirmOpacity"
+                            Classes="Primary" HorizontalAlignment="Center"/>
+
+                </StackPanel>
+
+            </TabItem>
+
+        </TabControl>
+
+    </Border>
+</UserControl>

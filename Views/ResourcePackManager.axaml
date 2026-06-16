@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="SkyLauncher.Views.ResourcePackManager"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:vm="clr-namespace:SkyLauncher.ViewModels"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SkyLauncher.Views"
+
+             x:DataType="vm:ResourcePackManagerViewModel"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450" >
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Background="{DynamicResource RegionBrush}" CornerRadius="4" Padding="10" Margin="10" >
+            <StackPanel Orientation="Horizontal" >
+                <Button Width="80" Margin="0,0,10,0"
+            Command="{Binding SaveCommand}">
+                    <DockPanel>
+                        <!-- Icon: <iconPacks:PackIconOcticons Kind="Check16" /> -->
+                        <TextBlock Text="确认" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                    </DockPanel>
+                </Button>
+                <Button  Width="110" Margin="0,0,10,0" Click="OpenResourcepackFolder"
+            >
+                    <DockPanel>
+                        <!-- Icon: <iconPacks:PackIconPhosphorIcons Kind="FolderOpen" /> -->
+                        <TextBlock Text="打开文件夹" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                    </DockPanel>
+                </Button>
+                <Button Margin="10,0,10,0" Click="GoBack">
+                    <DockPanel>
+                        <!-- Icon: <iconPacks:PackIconIonicons Kind="ArrowRoundBackiOS" /> -->
+                        <TextBlock Text="返回" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                    </DockPanel>
+                </Button>
+            </StackPanel>
+        </Border>
+        <!--hc:Divider Grid.Row="0" Content="资源包管理" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,15"/-->
+        <Border Grid.Row="1" Margin="10,0,10,0">
+            <DataGrid
+    ItemsSource="{Binding DataList}"
+    AutoGenerateColumns="False">
+
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn
+            Header="资源包"
+            Width="*"
+            Binding="{Binding FileName}" />
+
+                    <DataGridCheckBoxColumn
+            Header="启用"
+            Width="80"
+            Binding="{Binding IsEnabled,
+                      UpdateSourceTrigger=PropertyChanged}" />
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </Border>
+
+       
+    </Grid>
+</UserControl>

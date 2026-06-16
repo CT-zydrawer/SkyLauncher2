@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="SkyLauncher.Views.VersionManagementPage"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SkyLauncher.Views"
+             xmlns:vm="clr-namespace:SkyLauncher.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" x:DataType="vm:VersionManagementViewModel">
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 顶部操作栏 -->
+        <Border Grid.Row="0" Background="{DynamicResource RegionBrush}" CornerRadius="4" Padding="10" Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal">
+                
+                <Button  
+                        Command="{Binding RefreshCommand}" 
+                        Width="130" Margin="0,0,10,0"
+                        ToolTip.Tip="扫描 .minecraft/versions 文件夹">
+                    <DockPanel>
+                        <!-- Icon: <iconPacks:PackIconPhosphorIcons Kind="CubeFocus" Foreground="{DynamicResource PrimaryNormalBrush}" Width="16" Height="16"/> -->
+                        <TextBlock Text="扫描默认目录" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                    </DockPanel>
+                </Button>
+
+                <Button 
+                        Command="{Binding ImportVersionCommand}" 
+                        Width="110" Margin="0,0,10,0"
+                        ToolTip.Tip="手动选择版本 JSON 文件">
+                    <DockPanel>
+                        <!-- Icon: <iconPacks:PackIconPhosphorIcons Kind="FileArrowUp" Foreground="{DynamicResource PrimaryNormalBrush}" Width="16" Height="16"/> -->
+                        <TextBlock Text="导入json" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                    </DockPanel>
+                </Button>
+                <Button 
+                        Command="{Binding ImportFolderCommand}" 
+                        Width="110"
+                        ToolTip.Tip="手动选择版本文件夹">
+                    <DockPanel>
+                        <!-- Icon: <iconPacks:PackIconPhosphorIcons Kind="FolderOpen" Foreground="{DynamicResource PrimaryNormalBrush}" Width="16" Height="16"/> -->
+                        <TextBlock Text="导入文件夹" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                    </DockPanel>
+                </Button>
+                
+            </StackPanel>
+        </Border>
+
+        <!-- 版本列表 -->
+        <DataGrid Grid.Row="1"
+                  ItemsSource="{Binding InstanceList}"
+                  SelectedItem="{Binding SelectedInstance}"
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="120" Header="版本" Binding="{Binding VersionId}"/>
+                <DataGridTextColumn Width="350" Header="游戏目录" Binding="{Binding GameDirectory}"/>
+                <DataGridTemplateColumn Width="160" Header="操作">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid Width="160">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Content="删除实例"
+                                        ToolTip.Tip="删除此实例"
+                                        Click="DeleteInstance_Click"
+                                        Tag="{Binding}"
+                                        x:Name="DeleteInstanceButton"
+                                        Grid.Column="0"/>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- 底部：选中实例详情 -->
+        <Border Grid.Row="2" Background="{DynamicResource RegionBrush}" CornerRadius="4" Padding="10" Margin="0,10,0,0">
+            <DockPanel>
+            <TextBlock Text="{Binding SelectedInstanceInfo}" 
+                       TextWrapping="Wrap"
+                       Foreground="{DynamicResource SecondaryTextBrush}"/>
+            
+            </DockPanel>
+        </Border>
+    </Grid>
+</UserControl>
