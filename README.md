@@ -1,1 +1,1 @@
-This project is based on SkyLauncher , which build on WPF. I try to bulid a more flexible,morden App than I had even bulit.So I choose Avalonia to adapt MultiPlatform need.
+This project is based on SkyLauncher and was originally built on WPF. I tried to create an app that's more flexible and modern than what I made before. So I chose Avalonia to meet the multi-platform needs.
