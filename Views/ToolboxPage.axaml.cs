@@ -1,4 +1,13 @@
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.Shapes;
+using Avalonia.Data;
+using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Media;
+using Avalonia.Media.Imaging;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
 ﻿
 
 using SkyLauncher.Core.Models;
@@ -13,15 +22,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Data;
-
-using Avalonia.Input;
-using Avalonia.Media;
-using Avalonia.Media.Imaging;
-
-using Avalonia.Controls.Shapes;
 
 namespace SkyLauncher.Views
 {
@@ -139,13 +139,14 @@ namespace SkyLauncher.Views
             }
         }
 
-        private void ConfirmSelectPic(object sender, RoutedEventArgs e)
+        private async void ConfirmSelectPic(object sender, RoutedEventArgs e)
         {
             string imagePath = null /* TODO: ImageSelector */;
 
             if (imagePath == null)
             {
-                Console.WriteLine("[MessageBox] 请选择一张图片！");
+                var box = MessageBoxManager.GetMessageBoxStandard("提示", "路径错误,无法找到文件", ButtonEnum.Ok);
+                await box.ShowAsync();
                 return;
             }
             else
@@ -176,7 +177,7 @@ namespace SkyLauncher.Views
             }
         }
 
-        private void ConfirmOpacity(object sender, RoutedEventArgs e)
+        private async void ConfirmOpacity(object sender, RoutedEventArgs e)
         {
             double opacity = OpacitySlider.Value;
 
@@ -187,7 +188,8 @@ namespace SkyLauncher.Views
                 OpacityChanged?.Invoke(this, opacity);
                 Debug.WriteLine(_settings.LauncherOpacity);
                 Debug.WriteLine(_settings.LauncherOpacity.GetType());
-                Console.WriteLine($"[MessageBox] 已设置启动器不透明度为: {opacity:F2}");
+                var box = MessageBoxManager.GetMessageBoxStandard("设置", $"透明度已经选择{opacity:F2}", ButtonEnum.Ok);
+                await box.ShowAsync();
                
             }
         }

@@ -1,4 +1,13 @@
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.Shapes;
+using Avalonia.Data;
+using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Media;
+using Avalonia.Media.Imaging;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
 ﻿using SkyLauncher.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -7,15 +16,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Data;
-
-using Avalonia.Input;
-using Avalonia.Media;
-using Avalonia.Media.Imaging;
-
-using Avalonia.Controls.Shapes;
 
 namespace SkyLauncher.Views
 {
@@ -42,12 +42,13 @@ namespace SkyLauncher.Views
                     : string.Empty;
             }
         }
-        public void OpenSchematicsFilesFolder(object sender, RoutedEventArgs e)
+        public async void OpenSchematicsFilesFolder(object sender, RoutedEventArgs e)
         {
             var instance = MainViewModel.Instance.SelectedInstance;
             if (instance == null)
             {
-                Console.WriteLine("[MessageBox] 没有选中的实例");
+                var box = MessageBoxManager.GetMessageBoxStandard("错误", "未选择实例", ButtonEnum.Ok);
+                await box.ShowAsync();
                 return;
             }
             var shaderPacksDir = System.IO.Path.Combine(instance.GameDirectory, "schematics");
@@ -66,7 +67,8 @@ namespace SkyLauncher.Views
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[MessageBox] 无法打开文件夹: {ex.Message}");
+                var box = MessageBoxManager.GetMessageBoxStandard("错误", $"无法打开文件夹{ex.Message}", ButtonEnum.Ok);
+                await box.ShowAsync();
             }
         }
         public void LoadShaderPacks()

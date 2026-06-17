@@ -34,7 +34,7 @@ namespace SkyLauncher.Views
             }
             catch (System.Exception ex)
             {
-                Console.WriteLine($"[MessageBox] {ex.Message}");
+                Console.WriteLine($"FuckError {ex.Message}");
             }
         }
 

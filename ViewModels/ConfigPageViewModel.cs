@@ -2,6 +2,8 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Platform.Storage;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
 using Nrk.FluentCore.Environment;
 using SkyLauncher.Core.Models;
 using SkyLauncher.Core.Services;
@@ -9,6 +11,7 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace SkyLauncher.ViewModels;
@@ -20,7 +23,7 @@ public class ConfigPageViewModel : INotifyPropertyChanged
 
     public ConfigPageViewModel()
     {
-        AddJavaCommand = new RelayCommand(ExecuteAddJava);
+        AddJavaCommand = new RelayCommand(async ()=>ExecuteAddJava());
         AutoDetectJavaCommand = new RelayCommand(ExecuteAutoDetectJava);
     }
 
@@ -119,18 +122,86 @@ public class ConfigPageViewModel : INotifyPropertyChanged
     public ICommand AddJavaCommand { get; }
     public ICommand AutoDetectJavaCommand { get; }
 
-    private async void ExecuteAddJava()
+    private async Task ExecuteAddJava()
     {
-        
+        try
+        {
+            var mainWindow = ViewModelHelper.GetMainWindow();
+            if (mainWindow == null)
+            {
+                await ViewModelHelper.ShowMessageAsync("无法获取主窗口", "错误");
+                return;
+            }
+
+            // 设置文件选择器选项
+            var options = new FilePickerOpenOptions
+            {
+                Title = "选择 Java 可执行文件",
+                AllowMultiple = false,
+                FileTypeFilter = new[]
+                {
+                new FilePickerFileType("Java 运行时")
+                {
+                    Patterns = new[] { "javaw.exe", "java.exe" },
+                    MimeTypes = new[] { "application/x-msdownload" }
+                },
+                new FilePickerFileType("所有文件")
+                {
+                    Patterns = new[] { "*" },
+                    MimeTypes = new[] { "*/*" }
+                }
+            }
+            };
+
+            // 打开文件选择对话框
+            var result = await mainWindow.StorageProvider.OpenFilePickerAsync(options);
+
+            // 检查用户是否选择了文件
+            if (result == null || result.Count == 0)
+                return;
+
+            var filePath = result[0].Path.LocalPath;
+
+            // 导入 Java
+            var java = JavaRuntimeService.ImportJava(filePath);
+            if (java != null)
+            {
+                if (!JavaList.Any(j => j.ExecutablePath == java.ExecutablePath))
+                    JavaList.Add(java);
+                SelectedJava = java;
+            }
+        }
+        catch (Exception ex)
+        {
+            await ViewModelHelper.ShowMessageAsync($"选择 Java 失败：{ex.Message}", "错误");
+        }
     }
- 
-    private void ExecuteAutoDetectJava()
+
+    private async void ExecuteAutoDetectJava()
     {
         var javaList = JavaRuntimeService.ScanInstalledJava();
         JavaList.Clear();
         foreach (var java in javaList) JavaList.Add(java);
-        if (JavaList.Count > 0) SelectedJava = JavaList[0];
-        Console.WriteLine($"[MessageBox] 未找到已安装的 Java");
+        if (JavaList.Count > 0)
+        {
+            SelectedJava = JavaList[0];
+
+            var box = MessageBoxManager.GetMessageBoxStandard(
+                "信息",
+                $"找到 {JavaList.Count} 个 Java",
+                ButtonEnum.Ok);
+
+            await box.ShowAsync();
+        }
+        else
+        {
+            var box = MessageBoxManager.GetMessageBoxStandard(
+                "信息",
+                "未找到安装的 Java",
+                ButtonEnum.Ok);
+
+            await box.ShowAsync();
+        }
     }
 
     public void LoadData()

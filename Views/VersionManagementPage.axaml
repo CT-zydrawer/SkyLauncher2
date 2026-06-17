@@ -54,7 +54,8 @@
         <DataGrid Grid.Row="1"
                   ItemsSource="{Binding InstanceList}"
                   SelectedItem="{Binding SelectedInstance}"
-                  AutoGenerateColumns="False">
+                  AutoGenerateColumns="False"
+                  x:DataType="vm:VersionManagementViewModel">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="120" Header="版本" Binding="{Binding VersionId}"/>
                 <DataGridTextColumn Width="350" Header="游戏目录" Binding="{Binding GameDirectory}"/>
@@ -70,6 +71,7 @@
                                         ToolTip.Tip="删除此实例"
                                         Click="DeleteInstance_Click"
                                         Tag="{Binding}"
+                                        
                                         x:Name="DeleteInstanceButton"
                                         Grid.Column="0"/>
                             </Grid>
