@@ -30,6 +30,7 @@ public class ResourcePackItem : INotifyPropertyChanged
 
             _isEnabled = value;
             OnPropertyChanged();
+
         }
     }
 
@@ -117,15 +118,15 @@ public class ResourcePackManagerViewModel : INotifyPropertyChanged
         return result;
     }
 
-    public void OpenResourcePackFolder()
+    public async void OpenResourcePackFolder()
     {
         if (Directory.Exists(_resourcePacksDir))
             System.Diagnostics.Process.Start("explorer.exe", _resourcePacksDir);
         else
-            Console.WriteLine("[MessageBox] 资源包文件夹不存在！");
+            await ViewModelHelper.ShowMessageAsync("文件夹不存在或文件系统未适配", "错误");
     }
 
-    private void ExecuteSave()
+    private async void ExecuteSave()
     {
 
         var enabledList = DataList
@@ -155,7 +156,7 @@ public class ResourcePackManagerViewModel : INotifyPropertyChanged
 
         File.WriteAllLines(_optionsFilePath, lines);
 
-        Console.WriteLine("[MessageBox] 资源包设置已保存！");
+        await ViewModelHelper.ShowMessageAsync("更改已经保存", "信息");
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

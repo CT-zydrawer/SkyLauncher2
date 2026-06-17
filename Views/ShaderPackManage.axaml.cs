@@ -76,19 +76,20 @@ namespace SkyLauncher.Views
         {
             DataList.Clear();
 
-            if (!Directory.Exists(ShaderPacksDir))
-                Directory.CreateDirectory(ShaderPacksDir);
-
             // 读取已启用的资源包
-
-            // 遍历所有 zip
-            foreach (var file in Directory.GetFiles(ShaderPacksDir, "*.zip"))
+            if (File.Exists(ShaderPacksDir))
             {
-                DataList.Add(new ResourcePackItem
+                if (!Directory.Exists(ShaderPacksDir))
+                    Directory.CreateDirectory(ShaderPacksDir);
+                // 遍历所有 zip
+                foreach (var file in Directory.GetFiles(ShaderPacksDir, "*.zip"))
                 {
-                    FileName = System.IO.Path.GetFileName(file),
-                   
-                });
+                    DataList.Add(new ResourcePackItem
+                    {
+                        FileName = System.IO.Path.GetFileName(file),
+
+                    });
+                }
             }
         }
         private void GoBack(object sender, RoutedEventArgs e)

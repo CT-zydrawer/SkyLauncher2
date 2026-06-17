@@ -77,9 +77,8 @@
                     <RadioButton Content="深色"
                                  Click="SwitchToDark"/>
 
-                    <TextBlock Text="（Avalonia中可通过 ThemeVariant 切换）"
-                               Opacity="0.6"
-                               FontSize="12"/>
+                   <RadioButton Content="跟随系统"
+                                Click="UseDeafault"/>
 
                 </StackPanel>
                 </TransitioningContentControl>

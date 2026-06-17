@@ -35,19 +35,21 @@
             <DataGrid Grid.Row="0" 
       ItemsSource="{Binding Mods}"
       AutoGenerateColumns="False"
+      SelectionMode="Single"
+   
       x:Name="ModsDataGrid" Opacity="0.9">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="400" Header="名称" Binding="{Binding DisplayName}" IsReadOnly="True" />
                     <DataGridTextColumn Width="130" Header="版本" Binding="{Binding Version}" IsReadOnly="True" />
                     <DataGridTemplateColumn Header="状态" Width="80">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox IsChecked="{Binding IsEnabled}"
-                              Command="{Binding DataContext,RelativeSource={RelativeSource AncestorType=UserControl}}"
-                              CommandParameter="{Binding}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+    <DataGridTemplateColumn.CellTemplate>
+        <DataTemplate>
+            <CheckBox
+                 IsChecked="{Binding IsEnabled}"
+    Tapped="CheckBox_Tapped"/>
+        </DataTemplate>
+    </DataGridTemplateColumn.CellTemplate>
+</DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
 

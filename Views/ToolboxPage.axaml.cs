@@ -6,6 +6,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
+using Avalonia.Styling;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
 ﻿
@@ -85,42 +86,16 @@ namespace SkyLauncher.Views
 
         private void SwitchToLight(object sender, RoutedEventArgs e)
         {
-            /*var dicts = Application.Current.Resources.MergedDictionaries;
-            for (int i = dicts.Count - 1; i >= 0; i--)
-            {
-                var source = dicts[i].Source?.ToString();
-                if (source != null && source.Contains("Skin"))
-                {
-                    dicts.RemoveAt(i);
-                }
-            }
-            Application.Current.Resources.MergedDictionaries.Add(
-                ResourceHelper.GetSkin(SkinType.Default));
-            var brush = Application.Current.FindResource("RegionBrush") as SolidColorBrush;
-            Debug.WriteLine(brush.Color);
-            dicts.Add(ResourceHelper.GetSkin(SkinType.Default));
-
-            */
+            Application.Current!.RequestedThemeVariant = ThemeVariant.Light;
         }
 
         private void SwitchToDark(object sender, RoutedEventArgs e)
         {
-            /*var dicts = Application.Current.Resources.MergedDictionaries;
-            for (int i = dicts.Count - 1; i >= 0; i--)
-            {
-                var source = dicts[i].Source?.ToString();
-                if (source != null && source.Contains("Skin"))
-                {
-                    dicts.RemoveAt(i);
-                }
-            }
-            Application.Current.Resources.MergedDictionaries.Add(
-                ResourceHelper.GetSkin(SkinType.Dark));
-            var brush = Application.Current.FindResource("RegionBrush") as SolidColorBrush;
-            Debug.WriteLine(brush.Color);
-            dicts.Add(ResourceHelper.GetSkin(SkinType.Dark));
-
-            */
+            Application.Current!.RequestedThemeVariant = ThemeVariant.Dark;
+        }
+        private void UseDeafault(object sender, RoutedEventArgs e)
+        {
+            Application.Current!.RequestedThemeVariant = ThemeVariant.Default;
         }
 
         public Avalonia.Media.IImage BackgroundImagePath { get; set; }

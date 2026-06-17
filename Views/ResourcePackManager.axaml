@@ -38,7 +38,7 @@
             </StackPanel>
         </Border>
         <!--hc:Divider Grid.Row="0" Content="资源包管理" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,15"/-->
-        <Border Grid.Row="1" Margin="10,0,10,0">
+        <Border CornerRadius="4" Padding="10" Margin="10" Background="{DynamicResource RegionBrush}" Grid.Row="1" >
             <DataGrid
     ItemsSource="{Binding DataList}"
     AutoGenerateColumns="False">

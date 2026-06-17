@@ -74,8 +74,10 @@ namespace SkyLauncher.Views
         public void LoadShaderPacks()
         {
             DataList.Clear();
+            if (File.Exists(SchematicsFilesDir))
 
-            if (!Directory.Exists(SchematicsFilesDir))
+            {
+                if (!Directory.Exists(SchematicsFilesDir))
                 Directory.CreateDirectory(SchematicsFilesDir);
 
             // 读取已启用的资源包
@@ -89,6 +91,7 @@ namespace SkyLauncher.Views
 
                 });
             }
+        }
         }
         private void GoBack(object sender, RoutedEventArgs e)
         {

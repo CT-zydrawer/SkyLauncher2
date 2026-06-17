@@ -36,5 +36,14 @@ namespace SkyLauncher.Views
                 mainWindow.NavigateToPage(() => new Views.ConfigPage());
             }
         }
+
+        private void CheckBox_Tapped(object? sender, RoutedEventArgs e)
+        {
+            if (sender is CheckBox cb &&
+                cb.DataContext is MinecraftMod mod)
+            {
+                _viewModel?.ToggleModEnabled(mod);
+            }
+        }
     }
 }

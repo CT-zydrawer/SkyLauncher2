@@ -1,14 +1,17 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
 using Nrk.FluentCore.GameManagement.Mods;
 using SkyLauncher.Core.Models;
+using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System;
 
 namespace SkyLauncher.ViewModels
 {
+
     public partial class MinecraftSettingViewModel : ObservableObject
     {
         [ObservableProperty]
@@ -16,7 +19,7 @@ namespace SkyLauncher.ViewModels
 
         private MinecraftInstance _instance;
         private readonly string modsFolder;
-
+        //private bool _isEnabled;
         private string _minecraftName = "未知";
         public string MinecraftName
         {
@@ -26,11 +29,22 @@ namespace SkyLauncher.ViewModels
 
         public MinecraftSettingViewModel(MinecraftInstance instance)
         {
-            _instance = instance;
-            modsFolder = _instance.ModsPath;
-            MinecraftName = _instance.Name;
-            LoadMods();
+            if (instance != null)
+            {
+                _instance = instance;
+
+                modsFolder = _instance.ModsPath;
+                MinecraftName = _instance.Name;
+                LoadMods();
+            }
+            else
+            {
+                var box = MessageBoxManager.GetMessageBoxStandard("错误!", "没有实例被选择!", ButtonEnum.Ok);
+                
+            }
         }
+
+        
 
         [RelayCommand]
         private async void LoadMods()
@@ -55,7 +69,7 @@ namespace SkyLauncher.ViewModels
         }
 
         [RelayCommand]
-        public void ToggleModEnabled(MinecraftMod mod)
+        public async void ToggleModEnabled(MinecraftMod mod)
         {
             try
             {
@@ -71,17 +85,17 @@ namespace SkyLauncher.ViewModels
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[MessageBox] 切换模组状态失败：{ex.Message}\n请检查文件权限或是否被其他程序占用。");
+                await ViewModelHelper.ShowMessageAsync($"切换失败,检查文件是否被占用{ex}", "错误");
             }
         }
 
         [RelayCommand]
-        public void DeleteMod(MinecraftMod mod)
+        public async void DeleteMod(MinecraftMod mod)
         {
-            Console.WriteLine($"[MessageBox] 确定要删除模组 \"{mod.DisplayName}\" 吗？此操作不可恢复。");
+            await ViewModelHelper.ShowMessageAsync("确定要删除吗?这个操作将不可逆!", "警告");
 
             // TODO: Check dialog result
-        if (true) {
+            if (true) {
                 try
                 {
                     // 使用 FluentCore 的扩展方法删除模组
@@ -90,13 +104,13 @@ namespace SkyLauncher.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"[MessageBox] 删除模组失败：{ex.Message}");
+                    await ViewModelHelper.ShowMessageAsync($"删除失败{ex.Message}", "错误");
                 }
             }
         }
 
         [RelayCommand]
-        public void OpenModsFolder()
+        public async void OpenModsFolder()
         {
             if (Directory.Exists(modsFolder))
             {
@@ -104,7 +118,7 @@ namespace SkyLauncher.ViewModels
             }
             else
             {
-                Console.WriteLine($"[MessageBox] 模组文件夹不存在！");
+                await ViewModelHelper.ShowMessageAsync("无法加载", "错误");
             }
         }
     }

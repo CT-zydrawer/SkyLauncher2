@@ -4,6 +4,8 @@ VisualStudioVersion = 18.0.0.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyLauncher2", "SkyLauncher2.csproj", "{12345678-1234-1234-1234-123456789012}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SkyLauncherMultiPlatform", "..\SLRFMP\SkyLauncherMultiPlatform\SkyLauncherMultiPlatform.vdproj", "{6BDDE14E-E9ED-B537-6D20-454663E7914D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,5 +16,13 @@ Global
 		{12345678-1234-1234-1234-123456789012}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12345678-1234-1234-1234-123456789012}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12345678-1234-1234-1234-123456789012}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BDDE14E-E9ED-B537-6D20-454663E7914D}.Debug|Any CPU.ActiveCfg = Debug
+		{6BDDE14E-E9ED-B537-6D20-454663E7914D}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {37377269-3B6E-4829-89DB-7190BE670853}
 	EndGlobalSection
 EndGlobal

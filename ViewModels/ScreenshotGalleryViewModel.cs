@@ -32,7 +32,7 @@ public class ScreenshotGalleryViewModel : INotifyPropertyChanged
 
     public string EmptyMessage => $"截图文件夹为空\n{_screenshotFolder}";
 
-    public void LoadScreenshots()
+    public async void LoadScreenshots()
     {
         Screenshots.Clear();
 
@@ -62,7 +62,7 @@ public class ScreenshotGalleryViewModel : INotifyPropertyChanged
             }
             catch
             {
-                Console.WriteLine($"[MessageBox] 无法获取文件");
+                await ViewModelHelper.ShowMessageAsync("无法加载", "错误");
             }
         }
 
