@@ -51,6 +51,8 @@ public class LauncherSettings
 
     public bool DarkModeEnable { get; set; } = false ;//由于HandyControl导致工作量较大，搁置
 
+    public string VisonMode { get; set; } = "Default";
+
     //=====Personiziation=====
 
     public string ThemeColorSetting { get; set; } = "";

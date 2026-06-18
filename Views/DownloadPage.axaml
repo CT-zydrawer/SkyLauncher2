@@ -24,7 +24,7 @@
                             Command="{Binding PickPackageCommand}"
                             Grid.Row="0" 
                             Margin="0,5,0,5"
-                            Height="40"
+                            
                 
                      >
                                 <DockPanel>
@@ -35,7 +35,7 @@
 
                             <Grid
             Grid.Row="1" 
-                    HorizontalAlignment="Center" 
+                    HorizontalAlignment="Left" 
                     VerticalAlignment="Center"
                     Margin="0,20,0,0"
                     Opacity="0.9">
@@ -49,48 +49,24 @@
                                   IsVisible="{Binding IsInstalling}" Margin="0,10,0,0"/>
                                         <TextBlock Text="{Binding StatusText}" 
    FontSize="14" 
-   HorizontalAlignment="Center" 
+   HorizontalAlignment="Left" 
    Margin="30,10,30,10"
    TextWrapping="Wrap"
    MaxWidth="400"
-   TextAlignment="Center"/>
+   TextAlignment="Left"/>
                                     </StackPanel>
 
                                 </Border>
 
                             </Grid>
 
-                            <Border Grid.Row="2" 
-                Background="{DynamicResource RegionBrush}" 
-                CornerRadius="8" 
-                Padding="20" 
-                Margin="0,20,0,0"
-                VerticalAlignment="Bottom"
-                Opacity="0.9">
-
-                                <Border>
-
-                                    <StackPanel>
-                                        <DockPanel>
-                                            <!-- Icon: <iconPacks:PackIconLucide Kind="FileArchive" Width="14" Height="14" VerticalAlignment="Center"/> -->
-                                            <TextBlock Text=" .mrpack — Modrinth 整合包" Margin="0,2,0,2"/>
-                                        </DockPanel>
-                                        <DockPanel>
-                                            <!-- Icon: <iconPacks:PackIconLucide Kind="FileArchive" Width="14" Height="14" VerticalAlignment="Center"/> -->
-                                            <TextBlock Text=".zip — CurseForge 整合包" Margin="0,2,0,2" />
-                                        </DockPanel>
-
-                                    </StackPanel>
-
-                                </Border>
-
-                            </Border>
+                           
                             <Border BorderBrush="Red" Grid.Row="3" Margin="5,10,5,0">
                                 <DockPanel>
                                     <!-- Icon: <iconPacks:PackIconOcticons Kind="Alert16" Height="25" Width="25" VerticalAlignment="Center" Margin="0,0,10,0" Foreground="#e04f5e"/> -->
                                     <StackPanel>
-                                        <TextBlock Text="安装前需要配置好Java环境" Foreground="#e04f5e"/>
-                                        <TextBlock Text="安装过程中不要切换页面" Foreground="#e04f5e"/>
+                                        <TextBlock Text="安装前需要选择好Java环境" Foreground="#e04f5e"/>
+                                        <TextBlock Text="安装过程中尽量不要切换页面" Foreground="#e04f5e"/>
                                     </StackPanel>
                                 </DockPanel>
                             </Border>

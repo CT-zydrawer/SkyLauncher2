@@ -61,24 +61,51 @@ public class DownloadViewModel : INotifyPropertyChanged
 
     private async void ExecutePickPackage()
     {
-        // TODO: OpenFileDialog - use StorageProvider.OpenFilePickerAsync
-        var dialog = new FilePickerOpenOptions { Title = "选择文件", AllowMultiple = false };
+        var mainWindow = ViewModelHelper.GetMainWindow();
+        if (mainWindow == null)
+        {
+            await ViewModelHelper.ShowMessageAsync("无法获取主窗口", "错误");
+            return;
+        }
 
-        if (false) { } // TODO: await dialog.ShowAsync()
-        
+        var options = new FilePickerOpenOptions
+        {
+            Title = "选择版本 JSON 文件",
+            AllowMultiple = false,
+            FileTypeFilter = new[]
+                {
+                    new FilePickerFileType("Curseforge整合包文件")
+                    {
+                        Patterns = new[] { "*.zip" },
+                        
+                    },
+                    new FilePickerFileType("Modrinth整合包文件")
+                    {
+                        Patterns = new[] { "*.mrpack" },
+                    }
+                }
+        };
+
+        // 打开文件夹选择对话框
+        var result = await mainWindow.StorageProvider.OpenFilePickerAsync(options);
+
+        // 检查用户是否取消了选择
+        if (result == null || result.Count == 0)
+            return;
+
         IsInstalling = true;
         Progress = 0;
         _cts = new CancellationTokenSource();
 
         try
         {
-            var filePath = dialog.SuggestedFileName;
+            var filePath = options.SuggestedFileName;
             var minecraftFolder = MainViewModel.Instance.GetActualMinecraftFolder();
             var javaPath = MainViewModel.Instance.JavaExecutablePath;
 
             if (string.IsNullOrEmpty(javaPath))
             {
-                Console.WriteLine("[MessageBox] 请先在设置中配置 Java 运行时");
+                await ViewModelHelper.ShowMessageAsync("请先选择Java", "错误");
                 return;
             }
 

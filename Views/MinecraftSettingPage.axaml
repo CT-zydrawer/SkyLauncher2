@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="SkyLauncher.Views.MinecraftSettingPage"
+<UserControl x:Class="SkyLauncher.Views.MinecraftSettingPage"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,7 +7,9 @@
              xmlns:vm="clr-namespace:SkyLauncher.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:MinecraftSettingViewModel">
-    
+    <UserControl.Resources>
+        <PathGeometry x:Key="FolderMinusBold">M92,144a12,12,0,0,1,12-12h48a12,12,0,0,1,0,24H104A12,12,0,0,1,92,144ZM236,88V200.89A19.13,19.13,0,0,1,216.89,220H39.38A19.41,19.41,0,0,1,20,200.62V52A20,20,0,0,1,40,32H92.41a20,20,0,0,1,15,6.71l26,29.29H216A20,20,0,0,1,236,88ZM44,68h57.28L90.61,56H44ZM212,92H44V196H212Z</PathGeometry>
+    </UserControl.Resources>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -18,7 +20,7 @@
                 <Button  Width="110" Margin="0,0,10,0"  Click="OpenModFilesFolder"
 >
                         <DockPanel>
-                            <!-- Icon: <iconPacks:PackIconPhosphorIcons Kind="FolderOpen" /> -->
+                            <PathIcon Data="{StaticResource FolderMinusBold }"  />
                             <TextBlock Text="打开文件夹" Margin="12,0,0,0" VerticalAlignment="Center"/>
                         </DockPanel>
                     </Button>
@@ -45,8 +47,8 @@
     <DataGridTemplateColumn.CellTemplate>
         <DataTemplate>
             <CheckBox
-                 IsChecked="{Binding IsEnabled}"
-    Tapped="CheckBox_Tapped"/>
+                 IsChecked="{Binding IsEnabled, Mode=OneWay}"
+    Click="CheckBox_Tapped"/>
         </DataTemplate>
     </DataGridTemplateColumn.CellTemplate>
 </DataGridTemplateColumn>
